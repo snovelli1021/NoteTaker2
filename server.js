@@ -4,6 +4,8 @@ const path = require("path");
 const app = express();
 const PORT = 3001;
 const fs = require("fs");
+const uuid = require("./helpers/uuid");
+const notes = require("./db/db.json");
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -33,3 +35,23 @@ app.get("/api/notes", (req, res) => {
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "public/index.html"))
 );
+
+//This api POST route submits the user input as JSON to the notes array.
+app.post("/api/notes", (req, res) => {
+  const { title, text } = req.body;
+  if (title && text) {
+    const newNote = {
+      title,
+      text,
+      id: uuid(),
+    };
+
+    fs.readFile("./db/db.json", function (err, data) {
+      var addNote = JSON.parse(data);
+      addNote.push(newNote);
+      fs.writeFile("./db/db.json", JSON.stringify(addNote), (err) =>
+        err ? console.error(err) : res.json(addNote)
+      );
+    });
+  }
+});
