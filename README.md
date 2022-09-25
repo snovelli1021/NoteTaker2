@@ -4,8 +4,10 @@ This application uses express to stage a server on the backend with a GET and PO
 
 GitHub Repo: https://github.com/snovelli1021/NoteTaker2
 
-Heroku Deploy:
+Heroku Deploy: https://sheltered-bastion-19776.herokuapp.com/
 
 Deployed Screenshot:
 
-![my screenshot](./assets/screenshot.jpg)
+![my screenshot](public/assets/htmlPage.jpg)
+
+![my screenshot](public/assets/notesPage.jpg)
